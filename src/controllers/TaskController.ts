@@ -2,20 +2,41 @@ import { Request, Response } from "express";
 import { getRepository } from 'typeorm'
 import { Task } from '../entity/Task'
 
-module.exports = {
-    async index(req: Request, res: Response){
-        
-    },
-
-    async store(req: Request, res: Response){
-
-    },
-
-    async update(req: Request, res: Response){
-
-    },
-
-    async delete(req: Request, res: Response){
-
+export const getTasks = async (req: Request, res: Response) => {
+    const tasks = await getRepository(Task).find()
+    
+    if(!tasks){
+        return res.json({message: "There's no task here."})
     }
+
+    return res.json(tasks)
+}
+
+export const getOneTask = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const task = await getRepository(Task).findOne(id)
+
+    if(!task){
+        return res.json({message: "There's no task here."})
+    }
+    
+    return res.json(task)
+}
+
+export const createTask = async (req: Request, res: Response) => {
+    const task = await getRepository(Task).save(req.body)
+
+    return res.json(task)
+}
+
+export const finishTask = async (req: Request, res: Response) => {
+
+}
+
+export const updateTask = async (req: Request, res: Response) => {
+
+}
+
+export const deleteTask = async (req: Request, res: Response) => {
+
 }
