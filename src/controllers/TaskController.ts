@@ -24,6 +24,12 @@ export const getOneTask = async (req: Request, res: Response) => {
 }
 
 export const createTask = async (req: Request, res: Response) => {
+    const { title, description } = req.body
+
+    if(title.length === 0 || description.length === 0){
+        return res.status(400).json({message: 'Preencha todos os campos antes de enviar.'})
+    }
+
     const task = await getRepository(Task).save(req.body)
 
     return res.json(task)
