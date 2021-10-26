@@ -36,7 +36,18 @@ export const createTask = async (req: Request, res: Response) => {
 }
 
 export const finishTask = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const task = await getRepository(Task).findOne(id)
 
+    if(!task) {
+        return res.status(404).json({message: 'Tarefa não encontrada.'})
+    }
+
+    const finishedTask = await getRepository(Task).update(id, {
+        finished: true
+    })
+
+    return res.status(200).json({message:'OK'})
 }
 
 export const updateTask = async (req: Request, res: Response) => {
