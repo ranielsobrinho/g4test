@@ -6,7 +6,7 @@ export const getTasks = async (req: Request, res: Response) => {
     const tasks = await getRepository(Task).find()
     
     if(!tasks){
-        return res.json({message: "There's no task here."})
+        return res.json({message: "Tarefa não encontrada."})
     }
 
     return res.json(tasks)
@@ -17,7 +17,7 @@ export const getOneTask = async (req: Request, res: Response) => {
     const task = await getRepository(Task).findOne(id)
 
     if(!task){
-        return res.json({message: "There's no task here."})
+        return res.json({message: "Tarefa não encontrada."})
     }
     
     return res.json(task)
