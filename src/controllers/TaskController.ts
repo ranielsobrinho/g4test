@@ -65,5 +65,14 @@ export const updateTask = async (req: Request, res: Response) => {
 }
 
 export const deleteTask = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const task = await getRepository(Task).findOne(id)
 
+    if(!task){
+        return res.status(404).json({message: 'Tarefa não encontrada'})
+    }
+
+    const deleted = await getRepository(Task).delete(id)
+
+    return res.status(200).json({message: 'OK'})
 }
