@@ -1,12 +1,12 @@
 import 'reflect-metadata'
-import { createConnection } from 'typeorm'
 import * as express from 'express'
+
 import routes from './routes'
+import './database/connect'
 
 const app = express()
-const port = process.env.PORT || 3333
+const port = process.env.PORT || 5000
 
-createConnection()
 
 app.use(express.json())
 app.use(routes)
