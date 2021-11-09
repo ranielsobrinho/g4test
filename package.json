@@ -3,6 +3,7 @@
    "version": "0.0.1",
    "description": "A test project developed with TypeORM, Typescript, Node and Express.",
    "devDependencies": {
+      "@babel/preset-typescript": "^7.15.0",
       "@types/express": "^4.17.13",
       "@types/jest": "^27.0.2",
       "@types/node": "^8.0.29",
@@ -19,8 +20,8 @@
       "typeorm": "0.2.38"
    },
    "scripts": {
-      "dev": "nodemon src/index.ts",
-      "start": "ts-node src/index.ts",
+      "dev": "npx nodemon --exec ts-node src/index.ts",
+      "typeorm": "npx ts-node ./node_modules/typeorm/cli.js",
       "test": "jest"
    }
 }
