@@ -22,6 +22,16 @@ export class CreateQueueTable1636482492444 implements MigrationInterface {
                     name: "timeout",
                     type: "int",
                     isNullable: false
+                },
+                {
+                    name: "created_at",
+                    type:"timestamp",
+                    default: "now()"
+                },
+                {
+                    name: "updated_at",
+                    type: "timestamp",
+                    default: "now()"
                 }
             ]
         }))
