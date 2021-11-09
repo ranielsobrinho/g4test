@@ -24,11 +24,7 @@ export const getOneUser = async (req: Request, res: Response) => {
 }
 
 export const createUser = async (req: Request, res: Response) => {
-    const { nome, username, CPF, email, codigo_agente } = req.body
-
-    if(nome.length === 0 || username.length === 0 || CPF.length === 0 || email.length === 0 || codigo_agente.length === 0){
-        return res.status(400).json({message: 'Preencha todos os campos antes de enviar.'})
-    }
+    const { CPF } = req.body
 
     const existUser = await getRepository(User).findOne({where: {CPF}})
 
