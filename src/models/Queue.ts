@@ -1,5 +1,5 @@
 import internal = require("assert");
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity("queue")
 export class Queue {
@@ -11,4 +11,10 @@ export class Queue {
 
     @Column()
     timeout: number
+
+    @CreateDateColumn()
+    created_at: Date
+
+    @CreateDateColumn()
+    updated_at: Date
 }
