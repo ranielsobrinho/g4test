@@ -1,8 +1,8 @@
 import { Entity,Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 
-@Entity()
+@Entity("tasks")
 export class Task {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn("increment")
     id: number;
 
     @Column()
