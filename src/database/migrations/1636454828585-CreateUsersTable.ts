@@ -7,7 +7,13 @@ export class CreateUsersTable1636454828585 implements MigrationInterface {
             name: 'users',
             columns: [
                 {
-                    name: 'Nome',
+                    name: 'id',
+                    type: 'int',
+                    isGenerated: true,
+                    generationStrategy: 'increment'
+                },
+                {
+                    name: 'nome',
                     type: 'varchar',
                     isNullable: false
                 },
@@ -21,7 +27,8 @@ export class CreateUsersTable1636454828585 implements MigrationInterface {
                     name: 'CPF',
                     type: 'varchar',
                     isUnique: true,
-                    isNullable: false
+                    isNullable: false,
+                    isPrimary: true,
                 },
                 {
                     name: 'email',
