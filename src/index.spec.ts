@@ -1,12 +1,10 @@
 import request from "supertest"
-import routes from './routes'
+import { getTasks } from './controllers/TaskController'
 
 describe('Test routes', () => {
-    it('testing get tasks', async () => {
-        const res = await request(routes).get('/')
-
-        console.log(res.body)
-        expect(res.statusCode).toEqual(200)
+    it('should test equals to true', () => {
+        const result = request(getTasks).get('/')
+        expect(result).toHaveProperty('task')
     })
 })
 
