@@ -3,7 +3,11 @@ import { Queue } from '../models/Queue'
 import { getRepository } from 'typeorm'
 
 export const getQueues = async (req: Request, res: Response) => {
-    const queue = await getRepository(Queue).find()
+    const queue = await getRepository(Queue).find(
+        {
+            relations: ['userId']
+        }
+    )
 
     if(!queue) {
         return res.json({message: "Nenhuma fila cadastrada"})
@@ -15,11 +19,12 @@ export const getQueues = async (req: Request, res: Response) => {
 export const createQueue = async (req: Request, res: Response) => {
     const newQueue = await getRepository(Queue).save(req.body)
 
-    return res.json(newQueue)
+    return res.json({message: 'Cadastro feito com sucesso.'})
 }
 
 export const updateQueue = async (req: Request, res: Response) => {
     const {id} = req.params
+    const {nome, timeout} = req.body
 
     const queue = await getRepository(Queue).find({where: {id}})
 
@@ -27,7 +32,7 @@ export const updateQueue = async (req: Request, res: Response) => {
         return res.status(404).json({message: "Não há nenhuma fila existente para atualizar."})
     }
 
-    const updateQueue = await getRepository(Queue).save(req.body)
+    const updateQueue = await getRepository(Queue).query(`update queue set nome = '${nome}', timeout = '${timeout}' where id = ${id}`)
 
     return res.status(200).json({message: "Fila atualizada com sucesso."})
 }
