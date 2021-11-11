@@ -10,7 +10,9 @@ export class CreateUsersTable1636454828585 implements MigrationInterface {
                     name: 'id',
                     type: 'int',
                     isGenerated: true,
-                    generationStrategy: 'increment'
+                    generationStrategy: 'increment',
+                    isPrimary: true,
+                    isUnique: true
                 },
                 {
                     name: 'nome',
@@ -27,8 +29,7 @@ export class CreateUsersTable1636454828585 implements MigrationInterface {
                     name: 'CPF',
                     type: 'varchar',
                     isUnique: true,
-                    isNullable: false,
-                    isPrimary: true,
+                    isNullable: false
                 },
                 {
                     name: 'email',
