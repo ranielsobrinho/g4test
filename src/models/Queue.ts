@@ -1,5 +1,6 @@
 import internal = require("assert");
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import { User } from "./User";
 
 @Entity("queue")
 export class Queue {
@@ -17,4 +18,10 @@ export class Queue {
 
     @CreateDateColumn()
     updated_at: Date
+
+    @JoinColumn({
+        name: 'userId'
+    })
+    @ManyToOne(() => User)
+    userId: User
 }
