@@ -1,9 +1,9 @@
-import {Column, CreateDateColumn, Entity, Generated, PrimaryColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import { Queue } from "./Queue";
 
 @Entity("users")
 export class User {
-    @Generated("increment")
-    @Column()
+    @PrimaryGeneratedColumn("increment")
     id: number
 
     @Column()
@@ -12,7 +12,7 @@ export class User {
     @Column()
     username: string
 
-    @PrimaryColumn()
+    @Column()
     CPF: string
 
     @Column()
