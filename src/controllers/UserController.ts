@@ -5,7 +5,7 @@ import { User } from '../models/User'
 export const getUsers = async (req: Request, res: Response) => {
     const users = await getRepository(User).find()
     
-    if(!users){
+    if(users.length === 0){
         return res.json({message: "Nenhum usuário cadastrado."})
     }
 
