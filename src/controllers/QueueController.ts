@@ -1,14 +1,15 @@
 import { Request, Response } from 'express'
 import { Queue } from '../models/Queue'
 import { getRepository } from 'typeorm'
+import { User } from '../models/User'
 
 class QueueController{
     async getQueues (req: Request, res: Response){
-        const queue = await getRepository(Queue).find(
-            {
-                relations: ['userId']
-            }
-        )
+        const {id} = req.params
+        const queue = await getRepository(User).findOne(id, {
+            relations: ['queues'],
+            select: ['nome', 'username', 'email']
+        })
     
         if(!queue) {
             return res.json({message: "Nenhuma fila cadastrada"})
@@ -33,7 +34,7 @@ class QueueController{
             return res.status(404).json({message: "Não há nenhuma fila existente para atualizar."})
         }
     
-        const updateQueue = await getRepository(Queue).query(`update queue set nome = '${nome}', timeout = '${timeout}' where id = ${id}`)
+        const updateQueue = await getRepository(Queue).update(id, {nome, timeout})
     
         return res.status(200).json({message: "Fila atualizada com sucesso."})
     }
@@ -46,7 +47,7 @@ class QueueController{
             return res.status(404).json({message: "Não há fila para deletar."})
         }
     
-        const deletedQueue = await getRepository(Queue).query(`delete from queue where id = ${id}`)
+        const deletedQueue = await getRepository(Queue).delete(id)
     
         return res.status(200).json({message: "Fila deletada com sucesso."})
     }
