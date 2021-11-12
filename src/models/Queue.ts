@@ -22,6 +22,6 @@ export class Queue {
     @JoinColumn({
         name: 'userId'
     })
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.queues)
     userId: User
 }
