@@ -1,18 +1,19 @@
-import request from "supertest"
-import { getTasks } from './controllers/TaskController'
+import * as request from "supertest"
+import app from './index'
+// import { User } from './models/User'
+// import { Queue } from './models/Queue'
+// import {getRepository} from 'typeorm'
 
-describe('Test routes', () => {
-    it('should test equals to true', () => {
-        const result = request(getTasks).get('/')
-        expect(result).toHaveProperty('task')
+describe('Testing routes', () => {
+    it('should return http status 200 in main route', async () => {
+        const response = await request(app).get('/')
+
+        expect(response.statusCode).toBe(200)
+    })
+
+    it('should return http status 200 in users route',async () => {
+        const response = await request(app).get('/users')
+
+        expect(response.statusCode).toBe(200)
     })
 })
-
-/* 
-    it('shoul test equals to true', () => {
-        const result = true
-        expect(result).toBe(true)
-    })
-
-
-*/
