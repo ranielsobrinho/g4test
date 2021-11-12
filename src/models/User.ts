@@ -26,5 +26,7 @@ export class User {
 
     @CreateDateColumn()
     updated_at: Date
-
+    
+    @OneToMany(() => Queue, queue => queue.userId, {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+    queues: Queue[]
 }
