@@ -40,6 +40,7 @@ class UserController {
 
     async updateUser (req: Request, res: Response) {
         const { id } = req.params
+        const { nome, username, CPF, email, codigo_agente } = req.body
         
         const user = await getRepository(User).findOne({where: {id}})
     
@@ -47,7 +48,7 @@ class UserController {
             return res.status(404).json({message: 'Usuário não existente.'})
         }
     
-        const updatedUser = await getRepository(User).save(req.body)
+        const updatedUser = await getRepository(User).update(id, {nome, username, CPF, email, codigo_agente})
     
         return res.status(200).json({message:'Usuário atualizado com sucesso.'})
     
@@ -61,7 +62,7 @@ class UserController {
             return res.status(404).json({message: 'Usuário não existente.'})
         }
     
-        const deleted = await getRepository(User).query(`delete from users where id = ${id}`)
+        const deleted = await getRepository(User).delete(id)
     
         return res.status(200).json({message: 'Usuário deletado com sucesso.'})
     }
