@@ -16,4 +16,15 @@ describe('Testing routes', () => {
 
         expect(response.statusCode).toBe(200)
     })
+
+    it('should return token when post credentials', async () => {
+        const response = await request(app)
+            .post('/auth')
+            .send({
+                username: "raniel25",
+                codigo_agente: "350124" 
+            })
+            
+            expect(response.statusCode).toBe(200)
+    })
 })
