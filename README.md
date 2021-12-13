@@ -1,4 +1,4 @@
-# Awesome Project Build with TypeORM
+# G4Test
 
 Steps to run this project:
 
